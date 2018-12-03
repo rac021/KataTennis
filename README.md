@@ -136,7 +136,7 @@
               .printScore()
               .winPoint(federer)   // Federer Wins
               .printScore()
-              .newGame()           // *** Start_TieBreak ***
+              .newGame()           // *** Start_Tie-Break ***
               .winPoint(federer)
               .printScore()
               .winPoint(federer)
