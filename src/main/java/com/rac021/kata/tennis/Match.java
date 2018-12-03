@@ -1,17 +1,30 @@
-# KataTennis
 
- Kata_Tennis with fluent implementation based on the Visitor Design Pattern in Java 8 ( Method reference )
-  
-  
-| Branch    | build status  |
-|-----------|---------------|
-| [master](https://github.com/rac021/KataTennis/tree/master)  |[![Build Status](https://travis-ci.org/ontop/ontop.svg?branch=master)](https://travis-ci.org/rac021/KataTennis)|
- 
- #### Sample code :   [**Match.java**]( https://github.com/rac021/KataTennis/blob/master/src/main/java/com/rac021/kata/tennis/Match.java) 
-  
- 
-    /* Fluent Implementation */
+package com.rac021.kata.tennis ;
+
+import com.rac021.kata.tennis.ui.Ui ;
+import com.rac021.kata.tennis.service.Play ;
+import com.rac021.kata.tennis.core.entities.Player ;
+
+
+public class Match                              {
+
+  public static void main(String[] args)        {
+     
+    Player nadal   = new Player("Nadal")        ;
+    Player federer = new Player("Federer")      ;
     
+    Ui ui = new Ui()                            ;
+    
+    Play tennis = new Play().tennis( nadal, federer )
+                            .ui(ui) ;
+    
+    /* Visitor Pattern in java 8 */
+    tennis.whenWinPoint( Player.class , tennis::incrementScore ) ;
+    
+    ui.printPlayers( nadal.getName(), federer.getName() )        ;
+   
+    /* Fluent Implementation */
+     
     tennis.newGame()           // Start_Game_1
           .winPoint(nadal)
           .printScore()
@@ -160,9 +173,6 @@
           .printScore()
           .winPoint(federer)   // END_MATCH_Federer_Wins
           .printScore()  ;
-              
-              
-              
- #### Output :
-
+  }
+}
 
