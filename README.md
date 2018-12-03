@@ -12,155 +12,155 @@
  
     /* Fluent Implementation */
     
-    tennis.newGame()           // Start_Game_1
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_2
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_3
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .newGame()           // Start_Game_4
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_5
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .newGame()           // Start_Game_6
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_7
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .newGame()           // Start_Game_8
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_9
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .newGame()           // Start_Game_10
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_11
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)     // Nadal Wins
-          .printScore()
-          .printScoreGames()
-          .newGame()           // Start_Game_12
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // Federer Wins
-          .printScore()
-          .newGame()           // *** Start_TieBreak ***
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(nadal)
-          .printScore()
-          .winPoint(federer)
-          .printScore()
-          .winPoint(federer)   // END_MATCH_Federer_Wins
-          .printScore()  ;
-              
+    new Play().tennis( nadal, federer )
+              .newGame()           // Start_Game_1
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_2
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_3
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .newGame()           // Start_Game_4
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_5
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .newGame()           // Start_Game_6
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_7
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .newGame()           // Start_Game_8
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_9
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .newGame()           // Start_Game_10
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_11
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)     // Nadal Wins
+              .printScore()
+              .printScoreGames()
+              .newGame()           // Start_Game_12
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // Federer Wins
+              .printScore()
+              .newGame()           // *** Start_TieBreak ***
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(nadal)
+              .printScore()
+              .winPoint(federer)
+              .printScore()
+              .winPoint(federer)   // END_MATCH_Federer_Wins
+              .printScore()  ;
               
               
  #### Output :
