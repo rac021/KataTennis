@@ -13,7 +13,7 @@ import java.util.stream.Collectors ;
 import com.rac021.kata.tennis.core.entities.Point ;
 
 /**
- * Calculate Scores and register a list the Games won by players
+ * Calculate Scores and register a list of the Games won by players
  *  Nb : Only Exceptions are Logged .
  */
 
