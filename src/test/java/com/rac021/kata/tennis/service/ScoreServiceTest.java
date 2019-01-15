@@ -17,12 +17,12 @@ import static org.hamcrest.collection.IsEmptyCollection.empty ;
  * @author ryahiaoui
  */
 
-public class ScoreServiceTest           {
+public class ScoreServiceTest                 {
 
-    private ScoreService scoreService   ;
+    private ScoreService scoreService         ;
     
-    private String nadale   = "Nadale"  ;
-    private String federer = "Federer"  ;
+    private final String nadale   = "Nadale"  ;
+    private final String federer = "Federer"  ;
     
     public ScoreServiceTest() {
     }
@@ -61,7 +61,7 @@ public class ScoreServiceTest           {
     public void shoudBeFinishedGameIfNotNewGameWasStarted() {
 
         boolean finishedGame = true                         ;
-        boolean result  = scoreService.isFinishedGame()     ;
+        boolean result       = scoreService.isEndGame()     ;
         assertThat( finishedGame, is(result ) )             ;
     }
 
@@ -162,7 +162,7 @@ public class ScoreServiceTest           {
     @Test
     public void shouldEndGameBeFalseBeforeStartingGame() {
         boolean expResult = false                        ;
-        boolean result = scoreService.endMatch()         ;
+        boolean result = scoreService.isEndMatch()       ;
         assertEquals(expResult, result)                  ;
     }
 
@@ -172,7 +172,7 @@ public class ScoreServiceTest           {
     @Test
     public void shouldFinishedGameBeFalseWhenStartingGame() {
         boolean expResult = true                            ;
-        boolean result    = scoreService.isFinishedGame()   ;
+        boolean result    = scoreService.isEndGame()        ;
         assertEquals(expResult, result)                     ;
     }
     

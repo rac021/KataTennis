@@ -14,7 +14,7 @@ import java.util.logging.Logger ;
 
 public class Player {
 
-    private static Logger LOGGER = Logger.getLogger(Player.class.getName()) ;
+    private static final Logger LOGGER = Logger.getLogger(Player.class.getName()) ;
    
     private final String name    ;
     

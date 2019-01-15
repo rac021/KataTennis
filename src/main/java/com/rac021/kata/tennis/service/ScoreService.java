@@ -24,9 +24,9 @@ import com.rac021.kata.tennis.core.entities.Point ;
 
 public class ScoreService  {
     
-    private static Logger LOGGER = Logger.getLogger(ScoreService.class.getName())    ;
+    private static final Logger LOGGER = Logger.getLogger(ScoreService.class.getName()) ;
     
-    private static final String   WINNER    =  ScoreService.WINNER_IS + "{{player}}" ;
+    private static final String   WINNER    =  ScoreService.WINNER_IS + "{{player}}"    ;
     
     private static final String   VANTAGE   = "Advantage {{player}}" ;
 
@@ -61,12 +61,12 @@ public class ScoreService  {
     public String get ( String  pOneName   ,
                         String  pTwoName ) {
         
-       Integer pOnePoint = scores[0] ; 
-       
-       Integer pTwoPoint = scores[1] ; 
-     
        if( tieBreak ) return tieBreakScore( pOneName, pTwoName )               ;
        
+       Integer pOnePoint = scores[0]                                           ; 
+       
+       Integer pTwoPoint = scores[1]                                           ; 
+     
        if ( pOnePoint.equals(pTwoPoint ) ) return deuce(pOnePoint)             ;
         
        if ( pOnePoint > 3 || pTwoPoint > 3 ) 
@@ -185,25 +185,25 @@ public class ScoreService  {
      * 
      * @return finishedGame
      */
-    public boolean isFinishedGame() {
-        return this.endGame         ;
+    public boolean isEndGame() {
+        return this.endGame    ;
     }
 
     /**
      * 
      * @return True of new Game Authorized
      */
-    public boolean tryNewGame()   {
+    public boolean tryNewGame()  {
     
-      if( endGame == true  )      {
+      if( endGame == true  )     {
        
-        if(  endMatch() ) {
-            return  false ;
+        if(  isEndMatch() ) {
+            return  false   ;
         }
-        releaseGame()     ;
-        releaseScores()   ;
-        current_game ++   ;
-        return true       ;
+        releaseGame()       ;
+        releaseScores()     ;
+        current_game ++     ;
+        return true         ;
         
       }
       else {
@@ -272,21 +272,17 @@ public class ScoreService  {
     
     /**
      * @return END_MATCH where 
-     * TieBreak Activated 
-     * AND ScoreAnyPlayer >= 6 & dif ( Abs ( Score_Player_1 - Score_Player_2 ) >= 2
+     * TieBreak = TRUE ( SO : ScoreAnyPlayer >= 6 )
+     * AND DIF ( Abs ( Score_Player_1 - Score_Player_2 ) >= 2
      * OR
-     * NOT TieBreak & Total_GAMES >= 6 &  
-     * dif ( Abs ( Games_Won_By_Player_1 - Games_Won_By_Player_2 )  >= 6 ) .
+     * TieBreak = FALSE 
+     * AND TOTAL_GAMES >= 6 AND 
+     * DIF ( Abs ( Games_Won_By_Player_1 - Games_Won_By_Player_2 )  >= 2 ) .
      */
-    public boolean endMatch()         {
+    
+    public boolean isEndMatch()       {
         
         if( endMatch ) return true    ;
-        
-        Map<String, Long> scoresGames = WINNER_GAMES.stream().collect (
-                Collectors.groupingBy (
-                        Function.identity(), Collectors.counting()
-                )
-        ) ;
         
         if( tieBreak )                                             {
           
@@ -297,30 +293,38 @@ public class ScoreService  {
                        ( scoreOne >= 6  ||  scoreTwo >= 6     )    ;
             return endMatch                                        ;
         }
-         
-        if( scoresGames.values().isEmpty() ) return false    ;
         
-        /* On Player won 6 Games , Second Player won 0 Game */
+        Map<String, Long> scoresGames = WINNER_GAMES.stream()
+                                                    .collect      (
+                    Collectors.groupingBy (
+                         Function.identity(), Collectors.counting()
+                )
+        ) ;
+        
+         
+        if( scoresGames.values().isEmpty() ) return false     ;
+        
+        /* One Player won 6 Games , Second Player won 0 Game */
         if( scoresGames.values().size()  == 1 &&
             scoresGames.values().iterator().hasNext() ) {
             
-           endMatch =  scoresGames.values().iterator().next() >= 6  && 
-                       isFinishedGame() ;
+           endMatch =  scoresGames.values().iterator().next() >= 6 
+                       && isEndGame() ;
         }
               
         if( scoresGames.values().size()  == 2 ) {
            
-            Iterator<Long> iter = scoresGames.values().iterator();
+          Iterator<Long> iter = scoresGames.values().iterator() ;
             
-            Long scoreOne = iter.next() ;
-            Long scoreTwo = iter.next() ;
-            
-           endMatch = ( Math.abs( scoreOne - scoreTwo ) >= 2 ) &&
-                      ( scoreOne >= 6  ||  scoreTwo >= 6     ) && 
-                      isFinishedGame()                          ;
+          Long scoreOne = iter.next() ;
+          Long scoreTwo = iter.next() ;
+           
+          endMatch = ( Math.abs( scoreOne - scoreTwo ) >= 2 ) &&
+                     ( scoreOne >= 6  ||  scoreTwo >= 6     ) && 
+                      isEndGame()                              ;
         }
        
-       return endMatch && isFinishedGame()  ;
+        return endMatch && isEndGame()  ;
     }
     
     /**
@@ -356,10 +360,10 @@ public class ScoreService  {
     private String getScorePlayer(  Map<String, Long> scoresGames , 
                                     String            player    ) {
         
-       return  scoresGames.get( WINNER_IS + player ) != null  ?
-                     String.valueOf ( 
-                        scoresGames.get( WINNER_IS + player ) )   :
-                     "0"                                          ;  
+       String key = WINNER_IS + player                            ;
+       
+       return  scoresGames.get( key ) != null  ?
+                  String.valueOf ( scoresGames.get( key ) ) : "0" ;  
     }
     
     private String tieBreakScore( String player1 , String player2 )  {
@@ -388,8 +392,8 @@ public class ScoreService  {
         return tieBreak         ;
     }
 
-    public void setTieBreak(Boolean tieBreak) {
-        this.tieBreak = tieBreak              ;
+    public void senableTieBreak() {
+        this.tieBreak = true      ;
     }
     
     

@@ -33,7 +33,7 @@ public class Play           {
     /* Save The Function tha will be called on each Win Point   */
     private final HashMap<Class<Player>, Consumer<Player>> INCREMENT_SCORE_FUNCTION = new HashMap<>() ;
     
-    private static Logger LOGGER = Logger.getLogger(Play.class.getName()) ;
+    private static final Logger LOGGER = Logger.getLogger(Play.class.getName()) ;
 
     /**
      * 
@@ -75,7 +75,8 @@ public class Play           {
                       " Begin a new Game before Start Playing " ) ;
         }
       
-        if ( scoreService.endMatch() )                       {
+        /* Match Ends => Exit */
+        if ( scoreService.isEndMatch() )                     {
 
             ui.printEndOfTheMatch()                          ;
             printScoreGames()                                ;
@@ -83,57 +84,56 @@ public class Play           {
             System.exit( 0 )                                 ;
         }
           
-        if ( ! scoreService.isFinishedGame() || 
-               scoreService.isTieBreak()      )              {
+        /* IsTaeBreak || Game not End => Increment Score    */
+        if ( ! scoreService.isEndGame () || 
+               scoreService.isTieBreak()  )                  {
             
             Consumer<Player> consumer = INCREMENT_SCORE_FUNCTION.get( Player.class ) ;
             consumer.accept(receiver )                                               ;
                         
-        } else {  /*   Game Finished. Ask for starting a new Game   */
+        } else                       { 
             
-            if( scoreService.getWinerGames().isEmpty() )             {
-               printScoreGames()                                     ;
-            }
-            else 
-               ui.printFinishedGame(scoreService.getWinerGames()   ) ;
+          printFinishedGames()       ;
         }
         
-        /* Display The Last Score of the Match -
-          EndMatch = END_GAME & Total_GAMES >= 6 & 
-          ( Abs ( Games_Won_By_Player_1 - Games_Won_By_Player_2 )  >= 6 )
-        */
-        
-        if ( scoreService.endMatch() && !scoreService.isTieBreak() ) {
-          
-            String score   = scoreService.get( PLAYER_1.getName()    ,
-                                               PLAYER_2.getName() )  ;
+        /** DISPLAYING The Last Score of the Match. */
        
-            ui.printCurrentScore ( getCurrentGame() , score )        ;
-            printScoreGames()                                        ;
-            ui.printEndOfTheMatch()                                  ;
+        /* Display TieBreak Score */
+        
+        if ( scoreService.isEndMatch() && scoreService.isTieBreak() )  {
+            
+            String score   = scoreService.get( PLAYER_1.getName()      ,
+                                               PLAYER_2.getName() )    ;
+            ui.print(score)                                            ;
+            ui.printNewLine()                                          ;
+            ui.printEndOfTheMatch()                                    ;
+            return this                                                ;
+        }
+        
+        /* Display "Simple" Score */
+         
+        else if ( scoreService.isEndMatch() )                          {
+          
+            String score   = scoreService.get( PLAYER_1.getName()      ,
+                                               PLAYER_2.getName() )    ;
+       
+            ui.printCurrentScore ( getCurrentGame() , score )          ;
+            printScoreGames()                                          ;
+            ui.printEndOfTheMatch()                                    ;
         
         }   
-        
-        if ( scoreService.endMatch() && scoreService.isTieBreak() ) {
-            String score   = scoreService.get( PLAYER_1.getName()   ,
-                                               PLAYER_2.getName() ) ;
-            ui.print(score)                                         ;
-            ui.printNewLine();
-            ui.printEndOfTheMatch()                                 ;
-            return this                                             ;
-        }
-        
+
         if( ! scoreService.isTieBreak() ) {
             
           /* Enable tieBreak if p1ScoreGames == p2ScoreGames == 6 */
         
-          Boolean tieBreak = scoreService.checkTieBreak ( PLAYER_1.getName()   ,
+          Boolean tieBreak = scoreService.checkTieBreak ( PLAYER_1.getName() ,
                                                           PLAYER_2.getName() ) ;
           if ( tieBreak )                                                    {
               printScore()                                                   ;
               scoreService.releaseScores()                                   ;
               ui.printEnableTieBreak()                                       ;
-              scoreService.setTieBreak( true )                               ;
+              scoreService.senableTieBreak( )                                ;
           }
 
         }
@@ -143,29 +143,29 @@ public class Play           {
     
     /**
      * 
-     * @param receiver 
+     * @param player 
      */
-    public void incrementScore( Player receiver )       {
+    public void incrementScore( Player player )         {
        
        /* If Game already started  */
         
-       if( ! scoreService.isFinishedGame() || 
+       if( ! scoreService.isEndGame() || 
              scoreService.isTieBreak() )                {
            
-            if( receiver == PLAYER_1 )                  {
+            if( player == PLAYER_1 )                    {
                  scoreService.incrementScorePlayerOne() ;
             } else {
                  scoreService.incrementScorePlayerTwo() ;
             }
 
-            String checkIfWinner = scoreService.get( PLAYER_1.getName()   ,
-                                                     PLAYER_2.getName() ) ; 
+            String checkIfAplayerWinTheGame = scoreService.get( PLAYER_1.getName()   ,
+                                                                PLAYER_2.getName() ) ; 
 
-            if ( scoreService.isFinishedGame() )            {
+            if ( scoreService.isEndGame() )             {
                 
-                /*  Save Winner in the list of the Games   */
+                /*  Save Winner in the list of the Games  */
                 
-                 scoreService.saveWinnerGame(checkIfWinner) ;
+                scoreService.saveWinnerGame( checkIfAplayerWinTheGame )   ;
             }
 
        } else {
@@ -269,6 +269,16 @@ public class Play           {
         )                                                     ;
         
         return this                                           ;
+    }
+    
+    /**
+     * 
+     * @return Play After printing Finished Games  
+     */
+    public Play printFinishedGames()                         {
+
+       ui.printFinishedGame(scoreService.getWinerGames()   ) ;
+       return this                                           ;
     }
     
     /**

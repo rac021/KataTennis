@@ -125,12 +125,12 @@
       print( " \n Please begin a new Game  \n " )  ;
     }
     
-    public void printNewLine()                    {
-      print( " \n                            " )  ;
+    public void printNewLine()                     {
+      print( " \n                            "  )  ;
     }
 
     public void printStars() {
-        System.out.println(" *******************************  ");
+        System.out.println(" *******************************  ") ;
     }
 
  }
