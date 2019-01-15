@@ -123,7 +123,9 @@ public class Play           {
         
         }   
 
-        if( ! scoreService.isTieBreak() ) {
+        /* Check AND Update TieBreak */
+     
+        if ( ! scoreService.isTieBreak() ) {
             
           /* Enable tieBreak if p1ScoreGames == p2ScoreGames == 6 */
         
