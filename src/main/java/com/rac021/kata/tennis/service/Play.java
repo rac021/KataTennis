@@ -61,10 +61,10 @@ public class Play           {
     
     /**
      * 
-     * @param receiver
+     * @param player
      * @return Play after player win POINT
      */
-    public Play winPoint( Player receiver )      {
+    public Play winPoint( Player player )        {
         
         if( scoreService.getCurrentGame() == 0 ) {
             
@@ -89,7 +89,7 @@ public class Play           {
                scoreService.isTieBreak()  )                  {
             
             Consumer<Player> consumer = INCREMENT_SCORE_FUNCTION.get( Player.class ) ;
-            consumer.accept(receiver )                                               ;
+            consumer.accept( player )                                                ;
                         
         } else                       { 
             
